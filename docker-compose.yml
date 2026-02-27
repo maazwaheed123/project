@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+
+  backend1:
+    build: ./backend
+
+  backend2:
+    build: ./backend
+
+  backend3:
+    build: ./backend
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./frontend/build:/usr/share/nginx/html
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
